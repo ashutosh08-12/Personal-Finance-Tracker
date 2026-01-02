@@ -1,5 +1,5 @@
 import { db } from "../database.js";
-import { redis } from "../redisClient.js";
+import redis from "../redisClient.js";
 
 
 const CACHE_15_MIN = 60 * 15; 
