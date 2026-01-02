@@ -1,11 +1,17 @@
-import pg from "pg";
+import pkg from "pg";
 import dotenv from "dotenv";
+
 dotenv.config();
 
-export const db = new pg.Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASS,
-  port: process.env.DB_PORT,
+const { Pool } = pkg;
+
+export const db = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
+
+db.connect()
+  .then(() => console.log(" Connected to Neon PostgreSQL"))
+  .catch((err) => console.error(" DB connection error:", err));
