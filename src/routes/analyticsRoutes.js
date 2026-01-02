@@ -1,10 +1,17 @@
 import express from "express";
-import { getAnalytics } from "../controllers/analyticsController.js";
 import { auth } from "../middleware/auth.js";
-import { analyticsLimiter } from "../middleware/rateLimiters.js";
+import {
+  getSummary,
+  getMonthlyAnalytics,
+  getYearlyAnalytics,
+  getCategoryAnalytics
+} from "../controllers/analyticsController.js";
 
 const router = express.Router();
 
-router.get("/", auth, analyticsLimiter, getAnalytics);
+router.get("/summary", auth, getSummary);
+router.get("/monthly", auth, getMonthlyAnalytics);
+router.get("/yearly", auth, getYearlyAnalytics);
+router.get("/category", auth, getCategoryAnalytics);
 
 export default router;

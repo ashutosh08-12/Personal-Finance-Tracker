@@ -16,7 +16,7 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body; 
 
   const userRes = await db.query("SELECT * FROM users WHERE email=$1", [email]);
   if (!userRes.rows.length) return res.status(404).json({ message: "User not found" });
